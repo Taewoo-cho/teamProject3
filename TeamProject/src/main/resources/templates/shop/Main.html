@@ -12,54 +12,47 @@
 
 <script>
 $(document).ready(function() {	
-	/* 검색창 */
 	$("#search1").on("click", function() {
 		var search2 = $.trim($("#search2").val());
-			
- 	  $.ajax({
-			url: "/ajax/search2",
-			type : "post",
-			data: {shopMenu : search2},
-			success: function(data) {
-					var kate = $("#title");		
-					
-					kate.empty();
-					
-					var str = '<h1>Menu List</h1>';
-
-					kate.append(str);
-											
-			}, error: function() {
-				alert("통신 실패");				
-			}
-		}); 
 	
-	
+ 	 	/* 검색창 */
 		$.ajax({
 			url: "/ajax/search2",
 			type : "post",
 			data: {shopMenu : search2},
 			success: function(data) {
-					var cards = $("#items");
+				
+				/* Menu List 타이틀 바뀜 */
+				var kate = $("#title");		
+				
+				kate.empty();
+				
+				var str = '<h1>Menu List</h1>';
+
+				kate.append(str);
+				
+				/* 검색창 */
+				var cards = $("#items");
+				
+				cards.empty();
+				
+				for (var i = 0; i < data.length; i++) {
+					var str = '<div class="card"">';
+					str += '<div class="row my-5 ms-3">';
+					str += '<div class="col-sm-4 text-center">';
+					str += '<a href="#"><img src=' + data[i].shopImage + 'class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>';
+					str += '</div>';
+					str += '<div class="col-sm-7">';
+					str += '<div>';
+					str += '<div>'; 	
+					str += '<div class="card-body">';
+					str += '<h2 class="card-title">' + data[i].shopMenu +'</h2>';
+					str += '<p class="card-text">' + data[i].shopMdetail +'</p>';
+					str += '<p class="card-text">' + data[i].shopMprice +'</p>';
+					str += '</div></div></div></div></div></div>';
 					
-					cards.empty();
-					
-					for (var i = 0; i < data.length; i++) {
-						var str = '<div class="card"">';
-						str += '<div class="row my-5 ms-3">';
-						str += '<div class="col-sm-4 text-center">';
-						str += '<a href="#"><img src="c:/image/kategorie/koFood.jpg" th:src="@{/kategorie/koFood.jpg}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>';
-						str += '</div>';
-						str += '<div class="col-sm-7">';
-						str += '<div>';
-						str += '<div>'; 	
-						str += '<div class="card-body">';
-						str += '<h2 class="card-title">' + data[i].shopMenu +'</h2>';
-						str += '<p class="card-text">' + data[i].shopMdetail +'</p>';
-						str += '</div></div></div></div></div></div>';
-						
-						cards.append(str);
-					}							
+					cards.append(str);
+				}							
 	
 			}, error: function() {
 				alert("통신 실패");				

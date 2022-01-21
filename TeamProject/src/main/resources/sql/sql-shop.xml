@@ -19,6 +19,8 @@
 				shop_pk, shop_name, shop_detail, shop_menu, shop_Mprice, shop_Mdetail, shop_image
 			FROM
 				t_shop
+			WHERE
+				shop_kate = #{shopKate}
 			ORDER BY
 				shop_pk DESC
 		]]>

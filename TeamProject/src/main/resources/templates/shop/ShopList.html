@@ -12,57 +12,50 @@
 
 <script>
 $(document).ready(function() {	
-	/* 검색창 */
 	$("#search1").on("click", function() {
 		var search2 = $.trim($("#search2").val());
-			
-		$.ajax({
-			url: "/ajax/search2",
-			type : "post",
-			data: {shopMenu : search2},
-			success: function(data) {
-					var kate = $("#title");		
-					
-					kate.empty();
-					
-					var str = '<h1>Menu List</h1>';
-
-					kate.append(str);
-											
-			}, error: function() {
-				alert("통신 실패");				
-			}
-		}); 
-	
+		
+		/* 검색창 */
 	 	$.ajax({
 			url: "/ajax/search2",
 			type : "post",
 			data: {shopMenu : search2},
 			success: function(data) {
-					var cards = $("#items");
-					
-					cards.empty();
-					
-					for (var i = 0; i < data.length; i++) {
-						var str = '<div class="card"">';
-						str += '<div class="row my-5 ms-3">';
-						str += '<div class="col-sm-4 text-center">';
-						str += '<a href="#"><img src="c:/image/kategorie/koFood.jpg" th:src="@{/kategorie/koFood.jpg}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>';
-						str += '</div>';
-						str += '<div class="col-sm-7">';
-						str += '<div>';
-						str += '<div>'; 	
-						str += '<div class="card-body">';
-						str += '<h2 class="card-title">' + data[i].shopMenu +'</h2>';
-						str += '<p class="card-text">' + data[i].shopMdetail +'</p>';
-						str += '</div>';
-						str += '<div th:unless="${#lists.size(shopList)} > 0">';
-						str += '<p>내용이 없습니다</p>';
-						str += '</div></div></div></div></div>';
+				
+				/* Menu List 타이틀 바뀜 */
+				var kate = $("#title");		
+				
+				kate.empty();
+				
+				var str = '<h1>Menu List</h1>';
 
-						cards.append(str);
-					}							
-	
+				kate.append(str);
+				
+				/* 검색창 */
+				/* line36,37은 shopList에서만 사용하니 사용하실 떈 지워주세요 */
+				$("#shop-list").addClass("d-none");
+				$("#menu-list").removeClass("d-none");
+			
+				var cards = $("#items");
+				cards.empty();
+				
+				for (var i = 0; i < data.length; i++) {
+					var str = '<div class="card"">';
+					str += '<div class="row my-5 ms-3">';
+					str += '<div class="col-sm-4 text-center">';
+					str += '<a href="#"><img src=' + data[i].shopImage + 'class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>';
+					str += '</div>';
+					str += '<div class="col-sm-7">';
+					str += '<div>';
+					str += '<div>'; 	
+					str += '<div class="card-body">';
+					str += '<h2 class="card-title">' + data[i].shopMenu +'</h2>';
+					str += '<p class="card-text">' + data[i].shopMdetail +'</p>';
+					str += '<p class="card-text">' + data[i].shopMprice +'</p>';
+					str += '</div></div></div></div></div></div>';
+					
+					cards.append(str);
+				}							
 			}, error: function() {
 				alert("통신 실패");				
 			}
@@ -74,7 +67,7 @@ $(document).ready(function() {
 </head>
 <body>
 	<header>
-		<!-- 네비게이션 1111-->
+		<!-- 네비게이션-->
 		<div class="container">
 			<nav class="navbar navbar-expand-sm navbar-light px-5" style=" background:#f0f0f5;">
 				<a href="/main" class="navbar-brand text-muted">T3</a>
@@ -166,16 +159,19 @@ $(document).ready(function() {
 						<div class="card" th:if="${#lists.size(shopList.getList())} > 0" th:each="list : ${shopList.getList()}">
 							<div class="row my-5 ms-3">
 								<div class="col-sm-4 text-center">
-									<a href="#"><img src="c:/image/kategorie/koFood.jpg" th:src="@{/kategorie/koFood.jpg}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
+									<a href="#"><img th:src="@{${list.shopImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
 								</div>
 								<div class="col-sm-7">
 									<div>
 										<div class="card-body">
-											<!-- <h2 class="card-title" id="name" th:text="${list.shopName}"></h2>
-											<p class="card-text" id="detail" th:text="${list.shopDetail}"></p> -->
-											
-											<h2 class="card-title" id="name" th:text="${list.shopMenu}"></h2>
-											<p class="card-text" id="detail" th:text="${list.shopMdetail}"></p>										
+											<div id="shop-list" class="">
+												<h2 class="card-title" id="name" th:text="${list.shopName}"></h2>
+												<p class="card-text" id="detail" th:text="${list.shopDetail}"></p>
+											</div>										
+											<div id="menu-list" class="d-none">
+												<h2 class="card-title" id="name" th:text="${list.shopMenu}"></h2>
+												<p class="card-text" id="detail" th:text="${list.shopMdetail}"></p>										
+											</div>
 										</div>
 										<div th:unless="${#lists.size(shopList)} > 0">
 											<p>내용이 없습니다</p>
