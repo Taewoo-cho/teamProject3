@@ -102,7 +102,62 @@ $(document).ready(function() {
 
 </head>
 <body>
-<header th:include="layout/header :: header"></header>
+	<header>
+		<!-- 네비게이션 1-->
+		<div class="container">
+			<nav class="navbar navbar-expand-sm navbar-light px-5" style=" background:#f0f0f5;">
+				<a href="/main" class="navbar-brand text-muted">T3</a>
+				<div class="ms-auto">
+					<a href="/login" style="text-decoration:none" class="pe-3">로그인</a>
+				</div>
+			</nav>
+			<!-- 네비게이션 2 -->
+			<!-- offcanvas -->
+			<nav class="navbar navbar-light border-bottom px-5">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+					<span class="navbar-toggler-icon"></span>
+					</button>
+				<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+					<div class="offcanvas-header">
+						<h5 class="offcanvas-title ps-5" id="offcanvasNavbarLabel">카테고리</h5>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body">
+						<ul class="navbar-nav justify-content-end flex-grow-1 ps-5">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/main">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/ko">한식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/we">양식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/jp">일식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/ch">중식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/snack">야식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/de">디저트</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<h2><a href="/main" class="nav-link text-muted active ms-3 pt-2">카테고리</a></h2>
+					</li>
+				</ul>
+			</div>
+			</nav>	
+		</div>	
+	</header>
 	
 	<main class="container py-5">
 		<div class="row my-5">

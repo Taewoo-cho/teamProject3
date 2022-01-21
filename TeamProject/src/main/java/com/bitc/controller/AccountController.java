@@ -20,16 +20,32 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 
+//	로그인 페이지, 이중 로그인 방지 추가
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login() throws Exception {
-		return "/account/login";
+	public String login(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("userId") != null ) {
+			return "redirect:/main";
+		} else {
+			return "/account/login";
+		}
+		
 	}
-	
+
+//	회원가입 페이지, 로그인 상태에서 회원가입 불가	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
-	public String join() throws Exception {
-		return "/account/join";
+	public String join(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("userId") != null ) {
+			return "redirect:/main";
+		} else {
+			return "/account/join";
+		}
 	}
 	
+//	마이 페이지, 비 로그인시 접속 불가
 	@RequestMapping(value="/myPage", method=RequestMethod.GET)
 	public String myPage(HttpServletRequest request) throws Exception {
 		
@@ -86,6 +102,9 @@ public class AccountController {
 				
 				// 5분간 세션유지
 				session.setMaxInactiveInterval(300);
+				
+				String sess = (String) session.getAttribute("userId");
+				System.out.println(sess);
 				
 				return 1;
 			} else {
