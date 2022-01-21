@@ -24,29 +24,35 @@ $(document).ready(function() {
 		author =$("#authority-m").val();
 	});
 	
-//	아이디 중복체크
+//	아이디 중복체크, 성공시 readonly 추가
 	$("#btn-overlap").on("click", function() {
 		var id = $.trim($("#user-id").val());
 		
-		$.ajax({
-			url: "/join/idOverlap",
-			method: "post",
-			data: {userId: id, userAuthority: author},
-			success: function(data) {
-				if(data == 0) {
-					alert("사용할 수 있는 아이디 입니다.");
-					count = 0;
-				} else if (data == 1) {
-					alert("이미 사용중인 아이디 입니다.");
-					count = 1;
+		if (id == "") {
+			alert("아이디를 입력해주세요");
+		} else {
+			$.ajax({
+				url: "/join/idOverlap",
+				method: "post",
+				data: {userId: id, userAuthority: author},
+				success: function(data) {
+					if(data == 0) {
+						alert("사용할 수 있는 아이디 입니다.");
+						$("#user-id").prop("readonly", true);
+						count = 0;
+					} else if (data == 1) {
+						alert("이미 사용중인 아이디 입니다.");
+						count = 1;
+					}
+				}, error: function() {
+					alert("DB연결이 필요합니다");
+					// 사용 원할시 아래 주석 해제
+					//count = 0;
 				}
-			}, error: function() {
-				alert("DB연결이 필요합니다");
-				// 사용 원할시 아래 주석 해제
-				//count = 0;
-			}
-			
-		});
+				
+			});
+		}
+		
 	});
 	
 	$("#btn-back").on("click", function() {
@@ -183,7 +189,7 @@ $(document).ready(function() {
 							<div class="row my-2">
 								<div class="col-sm-9">
 									<div class="form-floating">
-										<input type="text" class="form-control" id="user-id" name="userId" placeholder="아이디">
+										<input type="text" id="user-id" name="userId" placeholder="아이디" class="form-control">
 										<label for="user-id" class="form-label">아이디 <span style="color:red">*</span></label>
 									</div>
 								</div>

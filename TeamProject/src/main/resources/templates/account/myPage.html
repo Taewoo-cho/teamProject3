@@ -129,7 +129,10 @@ $(document).ready(function() {
 			type : "post",
 			data: {shopMenu : search2},
 			success: function(data) {
-				$("#main").attr("class","d-none");
+				var myInfo = $("#main");
+				
+				myInfo.empty();
+				//$("#main").attr("class","d-none");
 				$("#hidden").removeClass("d-none");
 				/* Menu List 타이틀 바뀜 */
 				var kate = $("#title");		
@@ -174,7 +177,7 @@ $(document).ready(function() {
 
 </head>
 <body>
-		<header>
+	<header>
 		<!-- 네비게이션 1-->
 		<div class="container">
 			<nav class="navbar navbar-expand-sm navbar-light px-5" style=" background:#f0f0f5;">
@@ -225,7 +228,7 @@ $(document).ready(function() {
 				</div>
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item">
-						<h2><a href="#" class="nav-link text-muted active ms-3">카테고리</a></h2>
+						<h2><a href="/main" class="nav-link text-muted active ms-3">카테고리</a></h2>
 					</li>
 				</ul>
 				<!-- 검색창 -->
@@ -241,7 +244,7 @@ $(document).ready(function() {
 				<!-- 마이페이지, 장바구니 -->
 				<div class="ms-auto" th:if="${session.userId} != null">
 					<div class="p-3">
-						<a href="/myPage"><img src="c:/image/main/user.png" th:src="@{/main/user.png}" style="width: 50px; height: 50px;" ></a>
+						<a href="/myPage"><img src="c:/image/main/user.png" th:src="@{/main/user.png}" style="width: 50px; height: 50px;" class="me-2" ></a>
 						<a href="/basketPaging"><img src="c:/image/main/cart.png" th:src="@{/main/cart.png}" style="width: 50px; height: 50px;" class="ms-4"></a>
 					</div>
 					<div>
@@ -256,8 +259,8 @@ $(document).ready(function() {
 		</div>	
 	</header>
 	
-	<main class="container py-5">
-		<div class="row my-5" id="main">
+	<main class="container py-5" id="main">
+		<div class="row my-5">
 			<div class="col-sm-5 mx-auto">
 				<h2 class="my-3">마이페이지</h2>
 				<form>
@@ -348,54 +351,15 @@ $(document).ready(function() {
 				</form>
 			</div>
 		</div>
-		<div class="mt-2 p-3" id="hidden">
-				<div id="title" class="border-top border-bottom my-3 ps-3 py-2 text-muted" style=" background:#f0f0f5;">
-					<h1>Kategorie</h1>
-				</div>				
-				<div id="items" class="border mx-auto shadow p-3 mb-5 bg-white rounded" style="width: 1150px; height: 800px; border-radius: 40px;">		
-					<div class="row my-5 mx-5">
-						<div class="col-sm">
-							<a href="/shopList/ko">
-								<label>한식</label>
-								<img src="c:/image/kategorie/koFood.jpg" th:src="@{/kategorie/koFood.jpg}" class="rounded-circle me-5" style="width: 250px; height: 250px;">							
-							</a>
-						</div>
-						<div class="col-sm">
-							<a href="/shopList/we">
-								<label>양식</label>
-								<img src="c:/image/kategorie/weFood.jpg" th:src="@{/kategorie/weFood.jpg}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
-							</a>
-						</div>
-						<div class="col-sm">
-							<a href="/shopList/jp">
-								<label>일식</label>
-								<img src="c:/image/kategorie/jpFood.jpg" th:src="@{/kategorie/jpFood.jpg}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
-							</a>
-						</div>
-					</div>				
-					<div class="row  my-5 mx-5">
-						<div class="col-sm">
-							<a href="/shopList/ch">
-								<label>중식</label>
-								<img src="c:/image/kategorie/chFood.jpg" th:src="@{/kategorie/chFood.jpg}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
-							</a>
-						</div>
-						<div class="col-sm">
-							<a href="/shopList/snack">
-								<label>야식</label>
-								<img src="c:/image/kategorie/snack.jfif" th:src="@{/kategorie/snack.jfif}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
-							</a>
-						</div>
-						<div class="col-sm">
-							<a href="/shopList/de">
-								<label>디저트</label>
-								<img src="c:/image/kategorie/de.jfif" th:src="@{/kategorie/de.jfif}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
 	</main>
+	
+	<div class="container p-3 d-none" id="hidden">
+		<div id="title" class="border-top border-bottom mb-3 ps-3 pb-2 text-muted" style=" background:#f0f0f5;">
+			<h1>Kategorie</h1>
+		</div>
+		<div id="items" class="border mx-auto shadow p-3 mb-5 bg-white rounded" style="width: 1150px; height: 800px; border-radius: 40px;"></div>
+	</div>
+
 	
 	<footer th:replace="layout/footer :: footer"></footer>	
 </body>
