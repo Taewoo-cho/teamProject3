@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- orders 가 t_order_detail // t_shop 가 t_order -->
+<mapper namespace="com.bitc.mapper.ProductMapper">
+	<select id="selectMenuList" resultType="com.bitc.dto.ProductDto">
+		<![CDATA[
+			SELECT
+				shop_idx, shop_menu, menu_price, menu_info
+			FROM
+				t_order
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY
+				shop_idx DESC
+		]]>
+	</select>
+	
+	<select id="selectBasketList" resultType="com.bitc.dto.ProductDto">
+		<![CDATA[
+			SELECT
+				no, shop_name, shop_menu, menu_price
+			FROM
+				t_order_detail
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY
+				no DESC
+		]]>
+	</select>
+	
+	<select id="selectMenuPageList" resultType="com.bitc.dto.ProductDto">
+		<![CDATA[
+			SELECT
+				shop_idx, shop_menu, menu_price, menu_info
+			FROM
+				t_order
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY
+				shop_idx DESC
+		]]>
+	</select>
+	
+	<select id="selectBasketPageList" resultType="com.bitc.dto.ProductDto">
+		<![CDATA[
+			SELECT
+				no, shop_name, shop_menu, menu_price
+			FROM
+				t_order_detail
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY
+				no DESC
+		]]>
+	</select>
+	
+	<insert id="insertMenu" parameterType="com.bitc.dto.ProductDto" useGeneratedKeys="true" keyProperty="shopIdx">
+		<![CDATA[
+			INSERT INTO 
+				orders(shop_name, shop_menu, menu_price, shop_idx)	
+			SELECT
+				shop_name, shop_menu, menu_price, shop_idx
+			FROM
+				t_order
+			WHERE
+				shop_idx = #{shopIdx}
+		]]>
+	</insert>
+	
+	<update id="deleteMenu" parameterType="int">
+		<![CDATA[
+			UPDATE
+				t_order_detail
+			SET
+				deleted_yn = 'Y'
+			WHERE
+				no = #{no}
+		]]>
+	</update>
+	
+	<select id="showPrice" resultType="com.bitc.dto.ProductDto">
+		<![CDATA[
+			SELECT
+				menu_price
+			FROM
+				t_order_detail
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY
+				no DESC
+		]]>
+	</select>
+</mapper>
