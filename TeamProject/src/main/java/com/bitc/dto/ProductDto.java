@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class ProductDto {
 
-	private int shopIdx;
+	private int shopPk;
 	private String shopName;
-	private String shopInfo;
+	private String shopDetail;
 	private String shopMenu;
-	private String menuPrice;
-	private String menuInfo;
+	private String shopMprice;
+	private String shopMdetail;
 	private int no;
 }

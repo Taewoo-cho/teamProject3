@@ -16,18 +16,18 @@
 
 <script>
 $(document).ready(function() {
-	
 	$.ajax ({
 		url: "/myPage",
 		method: "post",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
+			$("#user-id").val(data.userId);
 			$("#user-nick").val(data.userNick);
 			$("#user-phone").val(data.userPhone);
 			$("#user-addr").val(data.userAddr);
 		},
 		error: function() {
-			alert("데이터를 불러오는데 실패하였습니다");
+			alert("데이터를 불러오는데 실패함");
 		}
 	});
 	
@@ -40,13 +40,34 @@ $(document).ready(function() {
 			arr[i] = $(orders[i]).text();
 		}
 		
-		var no = $(this).children("span").text();
-		$("#method").val("DELETE");
-		var frm = $("#frm")[0];
-		var formData = new FormData(frm);
-		formData.append("no[]", arr);
-		frm.action = "/clear"
-		frm.submit();
+		$.ajax({
+			url: "/clear",
+			type: "DELETE",
+			data: {no : arr},
+			success: function(data) {
+				if (data == "success") {
+					alert("게산이 완료되었습니다.");
+					location.href="/main";
+				}
+				else {
+					alert("계산 중 오류가 발생했습니다.");
+				}
+			},
+			error: function() {
+				alert("dddd");
+			}
+		});
+		
+// 		var no = $(this).children("span").text();
+// 		var frm = $("#frm")[0];
+// 		var formData = new FormData(frm);
+// 		var no= [];
+// 		no=arr;
+// 		formData.append("no", arr);
+// 		formData.get("no");
+// 		console.log(no);
+// 		frm.action = "/clear"
+// 		frm.submit();
 	});
 });
 </script>
@@ -96,22 +117,19 @@ $(document).ready(function() {
 											<tr th:if="${#lists.size(prices)} > 0" th:each="list : ${prices}">
 												<td th:text="${list.no}" class="d-none order-no"></td>
 												<td th:text="${list.shopMenu}"></td>
-												<td th:text="${list.menuPrice} + ' 원'"></td>
+												<td th:text="${list.shopMprice} + ' 원'"></td>
 											</tr>
 										</tbody>
 									</table>	
-									<button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#div-modal" onclick="alertDialogBox()">계산하기</button>
-									<script>
+									<button type="button" class="btn btn-primary btn-delete" >계산하기</button>
+									<!-- <script>
 										function alertDialogBox() {
 											alert("게산이 완료되었습니다.")
 										}
-									</script>
+									</script> -->
 									<input type="hidden" id="method" name="_method">
 								</div>
 								</form>
-								
-								<!-- js alert -->
-								
 							</div>
 						</div>
 					</div>

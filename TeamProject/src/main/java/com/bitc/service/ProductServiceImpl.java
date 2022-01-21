@@ -12,45 +12,59 @@ import com.github.pagehelper.PageHelper;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+	
 	@Autowired
-	private ProductMapper productMapper;
+	private ProductMapper projectMapper;
 
 	@Override
 	public List<ProductDto> selectMenuList() throws Exception {
-		return productMapper.selectMenuList();
+		return projectMapper.selectMenuList();
 	}
 
 	@Override
 	public List<ProductDto> selectBasketList() throws Exception {
-		return productMapper.selectBasketList();
+		return projectMapper.selectBasketList();
 	}
 
 	@Override
 	public Page<ProductDto> selectMenuPageList(int pageNum) throws Exception {
 		PageHelper.startPage(pageNum, 3);
-		return productMapper.selectMenuPageList();
+		return projectMapper.selectMenuPageList();
 	}
 
 	@Override
 	public Page<ProductDto> selectBasketPageList(int pageNum) throws Exception {
 		PageHelper.startPage(pageNum, 3);
-		return productMapper.selectBasketPageList();
+		return projectMapper.selectBasketPageList();
 	}
 
 	@Override
 	public int insertMenu(ProductDto shop) throws Exception {
-		int result = productMapper.insertMenu(shop);
+		int result = projectMapper.insertMenu(shop);
 		
 		return result;
 	}
 
 	@Override
 	public void deleteMenu(int no) throws Exception {
-		productMapper.deleteMenu(no);
+		projectMapper.deleteMenu(no);
 	}
 
 	@Override
-	public void showPrice() throws Exception {
-		productMapper.showPrice();		
+	public List<ProductDto> selectPriceList() throws Exception {
+		return projectMapper.selectPriceList();
+	}
+
+	@Override
+	public int clearBasket(int[] no) throws Exception {
+		int count = 0;
+		
+		for (int i = 0; i < no.length; i++) {
+			var result = projectMapper.clearBasket(no[i]);
+			count += result;
+		}
+		
+		return count;
+		
 	}
 }

@@ -9,6 +9,7 @@ import com.github.pagehelper.Page;
 
 @Mapper
 public interface ProductMapper {
+
 	public List<ProductDto> selectMenuList() throws Exception;
 
 	public List<ProductDto> selectBasketList() throws Exception;
@@ -21,5 +22,7 @@ public interface ProductMapper {
 
 	public void deleteMenu(int no) throws Exception;
 
-	public void showPrice() throws Exception;
+	public List<ProductDto> selectPriceList() throws Exception;
+
+	public int clearBasket(int no) throws Exception;
 }

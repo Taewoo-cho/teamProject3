@@ -6,6 +6,7 @@ import com.bitc.dto.ProductDto;
 import com.github.pagehelper.Page;
 
 public interface ProductService {
+
 	List<ProductDto> selectMenuList() throws Exception;
 
 	List<ProductDto> selectBasketList() throws Exception;
@@ -18,5 +19,7 @@ public interface ProductService {
 
 	void deleteMenu(int no) throws Exception;
 
-	void showPrice() throws Exception;
+	List<ProductDto> selectPriceList()  throws Exception;
+
+	int clearBasket(int[] no) throws Exception;
 }

@@ -45,10 +45,10 @@
 		
 		var items = tag.parents(".row").find(".card-body").children();
 		
-		dataItems.shopIdx = tag.children("span").text();
+		dataItems.shopPk = tag.children("span").text();
 		dataItems.shopName = $(items[0]).text();
 		dataItems.shopMenu = $(items[1]).text();
-		dataItems.menuPrice = $(items[2]).text();
+		dataItems.shopMprice = $(items[2]).text();
 		
 		return dataItems;
 	}
@@ -76,14 +76,14 @@
 									<div class="card-body">
 										<h5 class="card-title" th:text="${list.shopName}"></h5>
 										<p class="card-text" th:text="${list.shopMenu}"></p>
-										<p class="card-text" th:text="${list.menuPrice}"></p>
+										<p class="card-text" th:text="${list.shopMprice}"></p>
 									</div>
 									<!-- <div th:unless="${#lists.size(pages.getList())} > 0">
 										<p>내용이 없습니다</p>
 									</div> -->
 								</div>
 								<div class="col-sm-2 d-flex align-content-center flex-wrap">
-									<button type="button" class="btn btn-primary float-end btn-order"><span class="d-none" th:text="${list.shopIdx}"></span>담기</button>
+									<button type="button" class="btn btn-primary float-end btn-order"><span class="d-none" th:text="${list.shopPk}"></span>담기</button>
 								</div>					
 							</div>
 						</div>
