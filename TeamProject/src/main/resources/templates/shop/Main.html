@@ -12,33 +12,33 @@
 
 <script>
 $(document).ready(function() {	
+	/* 검색창 */
 	$("#search1").on("click", function() {
 		var search2 = $.trim($("#search2").val());
-		
-		
-	/* 가게명 검색 */
- 	 $.ajax({
-			url: "/ajax/search",
+			
+ 	  $.ajax({
+			url: "/ajax/search2",
 			type : "post",
-			data: {shopName : search2},
+			data: {shopMenu : search2},
 			success: function(data) {
 					var kate = $("#title");		
 					
 					kate.empty();
 					
-					var str = '<h1>Shop List</h1>';
+					var str = '<h1>Menu List</h1>';
 
 					kate.append(str);
 											
 			}, error: function() {
 				alert("통신 실패");				
 			}
-		});
+		}); 
+	
 	
 		$.ajax({
-			url: "/ajax/search",
+			url: "/ajax/search2",
 			type : "post",
-			data: {shopName : search2},
+			data: {shopMenu : search2},
 			success: function(data) {
 					var cards = $("#items");
 					
@@ -54,13 +54,13 @@ $(document).ready(function() {
 						str += '<div>';
 						str += '<div>'; 	
 						str += '<div class="card-body">';
-						str += '<h2 class="card-title">' + data[i].shopName +'</h2>';
-						str += '<p class="card-text">' + data[i].shopDetail +'</p>';
+						str += '<h2 class="card-title">' + data[i].shopMenu +'</h2>';
+						str += '<p class="card-text">' + data[i].shopMdetail +'</p>';
 						str += '</div></div></div></div></div></div>';
 						
 						cards.append(str);
 					}							
-
+	
 			}, error: function() {
 				alert("통신 실패");				
 			}
@@ -128,8 +128,9 @@ $(document).ready(function() {
 				<!-- 검색창 -->
 				<div>
 					<form name="form-search" method="get" action="#">
-					    <div class="input-group">				     
-					    	<input type="submit" name="search1" id="search1" class="btn btn-search text-white" value="Q" style=" background:#0099ff; border-radius: 20px 0px 0px 20px;">	     
+					    <div class="input-group" style="">
+					    	<!-- submit->button -->				     
+					    	<input type="button" name="search1" id="search1" class="btn btn-search text-white" value="Q" style=" background:#0099ff; border-radius: 20px 0px 0px 20px;">	     
 					    	<input size=70 type="text" name="search2" id="search2" class="form-control" placeholder="검색어를 입력하세요" aria-label="search" aria-describedby="search" style="border-radius: 0px 20px 20px 0px; border-color: #0099ff;">
 					    </div>
 					</form>
@@ -144,6 +145,8 @@ $(document).ready(function() {
 						<a href="/myPage" style="text-decoration:none" class="pe-3">마이페이지</a>
 						<a href="/basketPaging" style="text-decoration:none">장바구니</a>
 					</div>
+				</div>
+				<div class="ms-auto" th:unless="${session.userId} != null">
 				</div>
 			</div>
 			</nav>	

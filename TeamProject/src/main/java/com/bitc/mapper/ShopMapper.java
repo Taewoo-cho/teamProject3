@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.bitc.dto.KategorieDto;
-import com.bitc.dto.ShopListDto;
+import com.bitc.dto.ShopDto;
 import com.github.pagehelper.Page;
 
 @Mapper
@@ -14,13 +14,14 @@ public interface ShopMapper {
 //	메인 화면 카테고리
 	List<KategorieDto> selectMain() throws Exception;
 	
-//	가게 목록
-	List<ShopListDto> selectShopList(@Param("shopKate")String shopKate) throws Exception;
-
-//	가게 목록 페이징
-	Page<ShopListDto> selectShopPageList() throws Exception;
+//	가게 목록 + 페이징
+	Page<ShopDto> selectShopPageList(@Param("shopKate")String shopKate) throws Exception;
 	
-//	검색창 기능 - 가게명
-	List<ShopListDto> search(String shopName) throws Exception;
+//	검색창 - 음식명
+	List<ShopDto> search2(String shopMenu) throws Exception;
+
+	
+
+	
 	
 }

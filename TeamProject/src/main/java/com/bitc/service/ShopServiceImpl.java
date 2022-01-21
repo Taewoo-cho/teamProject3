@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitc.dto.KategorieDto;
-import com.bitc.dto.ShopListDto;
+import com.bitc.dto.ShopDto;
 import com.bitc.mapper.ShopMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -22,24 +22,24 @@ public class ShopServiceImpl implements ShopService {
 	public List<KategorieDto> selectMain() throws Exception {
 		return shopmapper.selectMain();
 	}
-	
-//	가게 목록
+
+//	가게 목록 + 페이징
 	@Override
-	public List<ShopListDto> selectShopList(String shopKate) throws Exception {
-		return shopmapper.selectShopList(shopKate);
+	public Page<ShopDto> selectShopPageList(String shopKate, int pageNum) throws Exception {
+		PageHelper.startPage(pageNum, 3);
+		return shopmapper.selectShopPageList(shopKate);
+	}
+	
+//	검색창 - 음식명
+	@Override
+	public List<ShopDto> search2(String shopMenu) throws Exception {
+		return shopmapper.search2(shopMenu);
 	}
 
-//	가게 목록 페이징
-	@Override
-	public Page<ShopListDto> selectShopPageList(int pageNum) throws Exception {
-		PageHelper.startPage(pageNum, 3);
-		return shopmapper.selectShopPageList();
-	}	
 	
-//	검색창 기능 - 가게명
-	@Override
-	public List<ShopListDto> search(String shopName) throws Exception {
-		return shopmapper.search(shopName);
-	}
+
+	
+
+	
 	
 }

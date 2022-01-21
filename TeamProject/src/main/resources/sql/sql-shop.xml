@@ -11,31 +11,28 @@
 				t_kategorie
 		]]>
 	</select>
-	
-	<!--가게 목록-->
-	<select id="selectShopList" parameterType="String" resultType="com.bitc.dto.ShopListDto">
-		<![CDATA[ 
+		
+	<!--가게 목록 + 페이징-->
+	<select id="selectShopPageList" parameterType="String" resultType="com.bitc.dto.ShopDto">
+		<![CDATA[
 			SELECT
-				shop_name, shop_detail, shop_image
+				shop_pk, shop_name, shop_detail, shop_menu, shop_Mprice, shop_Mdetail, shop_image
 			FROM
-				t_shop_list
-			WHERE
-				shop_kate = #{shopKate}
+				t_shop
+			ORDER BY
+				shop_pk DESC
 		]]>
 	</select>
-	
-	<!--가게 목록 페이징-->
-	
-	
-	<!--검색창 기능 - 가게명-->
-	<select id="search" parameterType="String" resultType="com.bitc.dto.ShopListDto">
+
+	<!--검색창 - 음식명-->
+	<select id="search2" parameterType="com.bitc.dto.ShopDto" resultType="com.bitc.dto.ShopDto">
 		<![CDATA[ 
 			SELECT 
-				shop_name, shop_detail, shop_image
+				shop_pk, shop_name, shop_detail, shop_menu, shop_Mprice, shop_Mdetail, shop_image
 			FROM
-				t_shop_list
+				t_shop
 			WHERE 
-				shop_name LIKE CONCAT('%',#{shopName},'%') 
+				shop_menu LIKE CONCAT('%',#{shopMenu},'%') 
 		]]>
 	</select>
 	

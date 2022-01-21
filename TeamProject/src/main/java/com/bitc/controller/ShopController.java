@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.bitc.dto.KategorieDto;
-import com.bitc.dto.ShopListDto;
+import com.bitc.dto.ShopDto;
 import com.bitc.service.ShopService;
 import com.github.pagehelper.PageInfo;
 
@@ -32,37 +33,28 @@ public class ShopController {
 		return mv;
 	}
 	
-
-//	가게 목록
+//	가게 목록 + 페이징
 	@RequestMapping(value="/shopList/{shopKate}", method=RequestMethod.GET)
-	public ModelAndView selectShopList(@PathVariable("shopKate") String shopKate) throws Exception {
+	public ModelAndView selectShopList(
+			@PathVariable("shopKate") String shopKate,
+			@RequestParam(required = false, defaultValue = "1") int pageNum
+			) throws Exception {
+		
 		ModelAndView mv = new ModelAndView("/shop/ShopList");
 		
-		List<ShopListDto> shopList = shopService.selectShopList(shopKate);
-		mv.addObject("shopList", shopList);
-	
-		return mv;
-	}
-	
-//	가게 목록 페이징
-	@RequestMapping("/shopList")
-	public ModelAndView paging(@RequestParam(required = false, defaultValue="1") int pageNum) throws Exception {
-		ModelAndView mv = new ModelAndView("/shop/shopList/{shopKate}");
-		
-		PageInfo<ShopListDto> page = new PageInfo<>(shopService.selectShopPageList(pageNum), 3);
-		
-		mv.addObject("pages", page);
-		
-		return mv;
-	}
+		PageInfo<ShopDto> shopList = new PageInfo<>(shopService.selectShopPageList(shopKate, pageNum), 3);
 		 
-	
-//	검색창 기능 - 가게명
- 	@ResponseBody
-	@RequestMapping(value="/ajax/search", method=RequestMethod.POST)
-	public Object search(@RequestParam("shopName") String shopName) throws Exception {
+		mv.addObject("shopList", shopList);
 
-		List<ShopListDto> searchList = shopService.search(shopName);
+		return mv;
+	}
+
+//	검색창 - 음식명
+ 	@ResponseBody
+	@RequestMapping(value="/ajax/search2", method=RequestMethod.POST)
+	public Object search2(@RequestParam("shopMenu") String shopMenu) throws Exception {
+
+		List<ShopDto> searchList = shopService.search2(shopMenu);
 
 		return searchList;
 	}
