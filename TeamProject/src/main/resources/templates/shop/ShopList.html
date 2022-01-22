@@ -12,11 +12,18 @@
 
 <script>
 $(document).ready(function() {	
+	$("#search2").keypress(function(event){
+		if(event.which == 13) {
+			$("#search1").click();
+			return false;
+		}
+	});
+	
 	$("#search1").on("click", function() {
 		var search2 = $.trim($("#search2").val());
-		
-		/* 검색창 */
-	 	$.ajax({
+	
+ 	 	/* 검색창 */
+		$.ajax({
 			url: "/ajax/search2",
 			type : "post",
 			data: {shopMenu : search2},
@@ -30,13 +37,13 @@ $(document).ready(function() {
 				var str = '<h1>Menu List</h1>';
 
 				kate.append(str);
-				
+
 				/* 검색창 */
-				/* line36,37은 shopList에서만 사용하니 사용하실 떈 지워주세요 */
 				$("#shop-list").addClass("d-none");
 				$("#menu-list").removeClass("d-none");
 			
-				var cards = $("#items");
+var cards = $("#items");
+				
 				cards.empty();
 				
 				for (var i = 0; i < data.length; i++) {
@@ -56,6 +63,7 @@ $(document).ready(function() {
 					
 					cards.append(str);
 				}							
+	
 			}, error: function() {
 				alert("통신 실패");				
 			}
@@ -171,6 +179,7 @@ $(document).ready(function() {
 											<div id="menu-list" class="d-none">
 												<h2 class="card-title" id="name" th:text="${list.shopMenu}"></h2>
 												<p class="card-text" id="detail" th:text="${list.shopMdetail}"></p>										
+												<p class="card-text" id="detail" th:text="${list.shopMprice}"></p>										
 											</div>
 										</div>
 										<div th:unless="${#lists.size(shopList)} > 0">

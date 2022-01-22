@@ -12,6 +12,13 @@
 
 <script>
 $(document).ready(function() {	
+	$("#search2").keypress(function(event){
+		if(event.which == 13) {
+			$("#search1").click();
+			return false;
+		}
+	});
+	
 	$("#search1").on("click", function() {
 		var search2 = $.trim($("#search2").val());
 	
