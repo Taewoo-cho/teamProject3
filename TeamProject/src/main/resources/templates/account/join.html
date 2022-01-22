@@ -24,29 +24,35 @@ $(document).ready(function() {
 		author =$("#authority-m").val();
 	});
 	
-//	아이디 중복체크
+//	아이디 중복체크, 성공시 readonly 추가
 	$("#btn-overlap").on("click", function() {
 		var id = $.trim($("#user-id").val());
 		
-		$.ajax({
-			url: "/join/idOverlap",
-			method: "post",
-			data: {userId: id, userAuthority: author},
-			success: function(data) {
-				if(data == 0) {
-					alert("사용할 수 있는 아이디 입니다.");
-					count = 0;
-				} else if (data == 1) {
-					alert("이미 사용중인 아이디 입니다.");
-					count = 1;
+		if (id == "") {
+			alert("아이디를 입력해주세요");
+		} else {
+			$.ajax({
+				url: "/join/idOverlap",
+				method: "post",
+				data: {userId: id, userAuthority: author},
+				success: function(data) {
+					if(data == 0) {
+						alert("사용할 수 있는 아이디 입니다.");
+						$("#user-id").prop("readonly", true);
+						count = 0;
+					} else if (data == 1) {
+						alert("이미 사용중인 아이디 입니다.");
+						count = 1;
+					}
+				}, error: function() {
+					alert("DB연결이 필요합니다");
+					// 사용 원할시 아래 주석 해제
+					//count = 0;
 				}
-			}, error: function() {
-				alert("DB연결이 필요합니다");
-				// 사용 원할시 아래 주석 해제
-				//count = 0;
-			}
-			
-		});
+				
+			});
+		}
+		
 	});
 	
 	$("#btn-back").on("click", function() {
@@ -102,7 +108,62 @@ $(document).ready(function() {
 
 </head>
 <body>
-<header th:include="layout/header :: header"></header>
+	<header>
+		<!-- 네비게이션 1-->
+		<div class="container">
+			<nav class="navbar navbar-expand-sm navbar-light px-5" style=" background:#f0f0f5;">
+				<a href="/main" class="navbar-brand text-muted">T3</a>
+				<div class="ms-auto">
+					<a href="/login" style="text-decoration:none" class="pe-3">로그인</a>
+				</div>
+			</nav>
+			<!-- 네비게이션 2 -->
+			<!-- offcanvas -->
+			<nav class="navbar navbar-light border-bottom px-5">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+					<span class="navbar-toggler-icon"></span>
+					</button>
+				<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+					<div class="offcanvas-header">
+						<h5 class="offcanvas-title ps-5" id="offcanvasNavbarLabel">카테고리</h5>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body">
+						<ul class="navbar-nav justify-content-end flex-grow-1 ps-5">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/main">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/ko">한식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/we">양식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/jp">일식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/ch">중식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/snack">야식</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/shopList/de">디저트</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<h2><a href="/main" class="nav-link text-muted active ms-3 pt-2">카테고리</a></h2>
+					</li>
+				</ul>
+			</div>
+			</nav>	
+		</div>	
+	</header>
 	
 	<main class="container py-5">
 		<div class="row my-5">
@@ -128,7 +189,7 @@ $(document).ready(function() {
 							<div class="row my-2">
 								<div class="col-sm-9">
 									<div class="form-floating">
-										<input type="text" class="form-control" id="user-id" name="userId" placeholder="아이디">
+										<input type="text" id="user-id" name="userId" placeholder="아이디" class="form-control">
 										<label for="user-id" class="form-label">아이디 <span style="color:red">*</span></label>
 									</div>
 								</div>
