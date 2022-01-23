@@ -11,12 +11,12 @@
 				t_kategorie
 		]]>
 	</select>
-		
+	
 	<!--가게 목록 + 페이징-->
 	<select id="selectShopPageList" parameterType="String" resultType="com.bitc.dto.ShopDto">
 		<![CDATA[
 			SELECT
-				shop_pk, shop_name, shop_detail, shop_menu, shop_Mprice, shop_Mdetail, shop_image
+				shop_pk, shop_name, shop_detail, shop_image
 			FROM
 				t_shop
 			WHERE
@@ -27,15 +27,14 @@
 	</select>
 
 	<!--검색창 - 음식명-->
-	<select id="search2" parameterType="com.bitc.dto.ShopDto" resultType="com.bitc.dto.ShopDto">
+	<select id="search2" parameterType="com.bitc.dto.OrderDto" resultType="com.bitc.dto.OrderDto">
 		<![CDATA[ 
 			SELECT 
-				shop_pk, shop_name, shop_detail, shop_menu, shop_Mprice, shop_Mdetail, shop_image
+				no, shop_name, shop_menu, shop_Mprice, deleted_yn, shop_pk, completed_yn, shop_Mdetail, menu_image
 			FROM
-				t_shop
+				t_order_detail
 			WHERE 
 				shop_menu LIKE CONCAT('%',#{shopMenu},'%') 
 		]]>
 	</select>
-	
 </mapper>

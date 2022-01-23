@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.bitc.dto.KategorieDto;
+import com.bitc.dto.OrderDto;
 import com.bitc.dto.ShopDto;
 import com.github.pagehelper.Page;
 
@@ -18,7 +19,7 @@ public interface ShopMapper {
 	Page<ShopDto> selectShopPageList(@Param("shopKate")String shopKate) throws Exception;
 	
 //	검색창 - 음식명
-	List<ShopDto> search2(String shopMenu) throws Exception;
+	List<OrderDto> search2(String shopMenu) throws Exception;
 
 	
 

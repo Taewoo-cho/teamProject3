@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitc.dto.KategorieDto;
+import com.bitc.dto.OrderDto;
 import com.bitc.dto.ShopDto;
 import com.bitc.service.ShopService;
 import com.github.pagehelper.PageInfo;
@@ -52,9 +53,9 @@ public class ShopController {
 //	검색창 - 음식명
  	@ResponseBody
 	@RequestMapping(value="/ajax/search2", method=RequestMethod.POST)
-	public Object search2(@RequestParam("shopMenu") String shopMenu) throws Exception {
+ 	public Object search2(@RequestParam("shopMenu") String shopMenu) throws Exception {
 
-		List<ShopDto> searchList = shopService.search2(shopMenu);
+		List<OrderDto> searchList = shopService.search2(shopMenu);
 
 		return searchList;
 	}
