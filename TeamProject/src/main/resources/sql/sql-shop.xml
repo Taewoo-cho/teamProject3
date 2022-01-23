@@ -12,8 +12,8 @@
 		]]>
 	</select>
 	
-	<!--가게 목록 + 페이징-->
-	<select id="selectShopPageList" parameterType="String" resultType="com.bitc.dto.ShopDto">
+	<!--가게 목록-->
+	<select id="selectShopList" parameterType="String" resultType="com.bitc.dto.ShopDto">
 		<![CDATA[
 			SELECT
 				shop_pk, shop_name, shop_detail, shop_image
@@ -21,8 +21,6 @@
 				t_shop
 			WHERE
 				shop_kate = #{shopKate}
-			ORDER BY
-				shop_pk DESC
 		]]>
 	</select>
 

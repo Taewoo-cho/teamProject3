@@ -42,7 +42,7 @@ $(document).ready(function() {
 				$("#shop-list").addClass("d-none");
 				$("#menu-list").removeClass("d-none");
 			
-var cards = $("#items");
+				var cards = $("#items");
 				
 				cards.empty();
 				
@@ -162,9 +162,9 @@ var cards = $("#items");
 				<div id="title" class="border-top border-bottom my-3 ps-3 py-2 text-muted" style=" background:#f0f0f5;">
 					<h1>Shop List</h1>
 				</div>
-				<div class="border p-5 shadow p-3 mb-5 bg-white rounded" style="width: 1150px; height: 850px; border-radius: 40px;">
+				<div class="border p-5 shadow p-3 mb-5 bg-white rounded" style="border-radius: 40px;">
 					<form id="items">
-						<div class="card" th:if="${#lists.size(shopList.getList())} > 0" th:each="list : ${shopList.getList()}">
+						<div class="card" th:if="${#lists.size(shopList)} > 0" th:each="list : ${shopList}">
 							<div class="row my-5 ms-3">
 								<div class="col-sm-4 text-center">
 									<a href="#"><img th:src="@{${list.shopImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
@@ -190,22 +190,6 @@ var cards = $("#items");
 							</div>
 						</div>
 					</form>
-					<!-- 가게 목록 페이징 -->
-					<div class="my-3 clearfix">
-						<ul class="pagination justify-content-center">
-							<li class="page-item" th:classappend="${shopList.getPrePage() == 0} ? 'disabled'">
-								<a class="page-link" th:href="@{/shopList/{shopKate}(pageNum=${shopList.getPrePage()})}">&laquo;</a>
-							</li>
-							
-							<li class="page-item" th:each="page : ${#numbers.sequence(shopList.getNavigateFirstPage(), shopList.getNavigateLastPage())}" th:classappend="${page == shopList.getPageNum()} ? 'active'">
-								<a class="page-link" th:text="${page}" th:href="@{/shopList/{shopKate}(pageNum=${page})}"></a>
-							</li>
-							
-							<li class="page-item" th:classappend="${shopList.getNextPage() == 0} ? 'disabled'">
-								<a class="page-link" th:href="@{/shopList/{shopKate}(pageNum=${shopList.getNextPage()})}">&raquo;</a>
-							</li>
-						</ul>
-					</div>
 				</div>
 			</div>
 		</div>

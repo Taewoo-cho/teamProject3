@@ -34,19 +34,14 @@ public class ShopController {
 		return mv;
 	}
 	
-//	가게 목록 + 페이징
+//	가게 목록
 	@RequestMapping(value="/shopList/{shopKate}", method=RequestMethod.GET)
-	public ModelAndView selectShopList(
-			@PathVariable("shopKate") String shopKate,
-			@RequestParam(required = false, defaultValue = "1") int pageNum
-			) throws Exception {
-		
+	public ModelAndView selectShopList(@PathVariable("shopKate") String shopKate) throws Exception {
 		ModelAndView mv = new ModelAndView("/shop/ShopList");
 		
-		PageInfo<ShopDto> shopList = new PageInfo<>(shopService.selectShopPageList(shopKate, pageNum), 3);
-		 
+		List<ShopDto> shopList = shopService.selectShopList(shopKate);
 		mv.addObject("shopList", shopList);
-
+	
 		return mv;
 	}
 

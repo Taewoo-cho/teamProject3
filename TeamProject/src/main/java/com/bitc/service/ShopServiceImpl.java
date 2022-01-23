@@ -24,11 +24,10 @@ public class ShopServiceImpl implements ShopService {
 		return shopmapper.selectMain();
 	}
 
-//	가게 목록 + 페이징
+//	가게 목록
 	@Override
-	public Page<ShopDto> selectShopPageList(String shopKate, int pageNum) throws Exception {
-		PageHelper.startPage(pageNum, 3);
-		return shopmapper.selectShopPageList(shopKate);
+	public List<ShopDto> selectShopList(String shopKate) throws Exception {
+		return shopmapper.selectShopList(shopKate);
 	}
 	
 //	검색창 - 음식명
