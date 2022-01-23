@@ -44,22 +44,22 @@ $(document).ready(function() {
 				cards.empty();
 				
 				for (var i = 0; i < data.length; i++) {
-					var str = '<div class="card"">';
-					str += '<div class="row my-5 ms-3">';
-					str += '<div class="col-sm-4 text-center">';
-					str += '<a href="#"><img src=image' + data[i].shopImage + 'class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>';
-					str += '</div>';
-					str += '<div class="col-sm-7">';
-					str += '<div>';
-					str += '<div>'; 	
-					str += '<div class="card-body">';
-					str += '<h2 class="card-title">' + data[i].shopMenu +'</h2>';
-					str += '<p class="card-text">' + data[i].shopMdetail +'</p>';
-					str += '<p class="card-text">' + data[i].shopMprice +'</p>';
-					str += '</div></div></div></div></div></div>';
-					
-					cards.append(str);
-				}							
+		               var str = '<div class="card">';
+		               str += '<div class="row my-5 ms-3">';
+		               str += '<div class="col-sm-4 text-center">';
+		               str += '<a href="#"><img src=' + data[i].menuImage + ' class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>';
+		               str += '</div>';
+		               str += '<div class="col-sm-7">';
+		               str += '<div>';
+		               str += '<div>';    
+		               str += '<div class="card-body">';
+		               str += '<h2 class="card-title">' + data[i].shopMenu +'</h2>';
+		               str += '<p class="card-text">' + data[i].shopMdetail +'</p>';
+		               str += '<p class="card-text">' + data[i].shopMprice +'</p>';
+		               str += '</div></div></div></div></div></div>';
+		               
+		               cards.append(str);
+		            }							
 	
 			}, error: function() {
 				alert("통신 실패");				
