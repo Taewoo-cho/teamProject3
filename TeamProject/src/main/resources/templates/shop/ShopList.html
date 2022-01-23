@@ -167,7 +167,7 @@ $(document).ready(function() {
 						<div class="card" th:if="${#lists.size(shopList)} > 0" th:each="list : ${shopList}">
 							<div class="row my-5 ms-3">
 								<div class="col-sm-4 text-center">
-									<a href="#"><img th:src="@{${list.shopImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
+									<a href="/menu/" th:attrappend="href=${list.shopName}"><img th:src="@{${list.shopImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
 								</div>
 								<div class="col-sm-7">
 									<div>

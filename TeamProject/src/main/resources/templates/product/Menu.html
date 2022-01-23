@@ -45,7 +45,7 @@
 		
 		var items = tag.parents(".row").find(".card-body").children();
 		
-		dataItems.shopPk = tag.children("span").text();
+		dataItems.no = tag.children("span").text();
 		dataItems.shopName = $(items[0]).text();
 		dataItems.shopMenu = $(items[1]).text();
 		dataItems.shopMprice = $(items[2]).text();
@@ -68,22 +68,22 @@
 						<div class="card" th:if="${#lists.size(pages.getList())} > 0" th:each="list : ${pages.getList()}">
 							<div class="row my-5 ms-3">
 								<div class="col-sm-4 text-center">
-									<a href="#"><img src="c:/image/kategorie/koFood.jpg"
-										th:src="@{/kategorie/koFood.jpg}" class="rounded-circle me-5"
+									<a href="#"><img th:src="@{${list.menuImage}}"  class="rounded-circle me-5"
 										style="width: 120px; height: 120px;"></a>
 								</div>
 								<div class="col-sm-6">
 									<div class="card-body">
 										<h5 class="card-title" th:text="${list.shopName}"></h5>
 										<p class="card-text" th:text="${list.shopMenu}"></p>
-										<p class="card-text" th:text="${list.shopMprice}"></p>
+										<p class="card-text" th:text="${list.shopMprice} + ' 원'"></p>
+										<p class="card-text" th:text="${list.shopMdetail}"></p>
 									</div>
 									<!-- <div th:unless="${#lists.size(pages.getList())} > 0">
 										<p>내용이 없습니다</p>
 									</div> -->
 								</div>
 								<div class="col-sm-2 d-flex align-content-center flex-wrap">
-									<button type="button" class="btn btn-primary float-end btn-order"><span class="d-none" th:text="${list.shopPk}"></span>담기</button>
+									<button type="button" class="btn btn-primary float-end btn-order"><span class="d-none" th:text="${list.no}"></span>담기</button>
 								</div>					
 							</div>
 						</div>
@@ -91,13 +91,13 @@
 					<div class="my-3 clearfix">
 						<ul class="pagination justify-content-center">
 							<li class="page-item" th:classappend="${pages.getPrePage() == 0} ? 'disabled'">
-								<a class="page-link" th:href="@{/menu(pageNum=${pages.getPrePage()})}">Prev</a>
+								<a class="page-link" th:href="@{|/menu/${shopName}|(pageNum=${pages.getPrePage()})}">Prev</a>
 							</li>
 							<li class="page-item" th:each="page : ${#numbers.sequence(pages.getNavigateFirstPage(), pages.getNavigateLastPage())}" th:classappend="${page == pages.getPageNum()} ? 'active'">
-								<a class="page-link" th:text="${page}" th:href="@{/menu(pageNum=${page})}"></a>
+								<a class="page-link" th:text="${page}" th:href="@{|/menu/${shopName}|(pageNum=${page})}"></a>
 							</li>
 							<li class="page-item" th:classappend="${pages.getNextPage() == 0} ? 'disabled'">
-								<a class="page-link" th:href="@{/menu(pageNum=${pages.getNextPage()})}">Next</a>
+								<a class="page-link" th:href="@{|/menu/${shopName}|(pageNum=${pages.getNextPage()})}">Next</a>
 							</li>
 						</ul>
 					</div>
