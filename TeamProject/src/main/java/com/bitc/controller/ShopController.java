@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitc.dto.KategorieDto;
+import com.bitc.dto.OrderDto;
 import com.bitc.dto.ShopDto;
 import com.bitc.service.ShopService;
 import com.github.pagehelper.PageInfo;
@@ -33,28 +34,23 @@ public class ShopController {
 		return mv;
 	}
 	
-//	가게 목록 + 페이징
+//	가게 목록
 	@RequestMapping(value="/shopList/{shopKate}", method=RequestMethod.GET)
-	public ModelAndView selectShopList(
-			@PathVariable("shopKate") String shopKate,
-			@RequestParam(required = false, defaultValue = "1") int pageNum
-			) throws Exception {
-		
+	public ModelAndView selectShopList(@PathVariable("shopKate") String shopKate) throws Exception {
 		ModelAndView mv = new ModelAndView("/shop/ShopList");
 		
-		PageInfo<ShopDto> shopList = new PageInfo<>(shopService.selectShopPageList(shopKate, pageNum), 3);
-		 
+		List<ShopDto> shopList = shopService.selectShopList(shopKate);
 		mv.addObject("shopList", shopList);
-
+	
 		return mv;
 	}
 
 //	검색창 - 음식명
  	@ResponseBody
 	@RequestMapping(value="/ajax/search2", method=RequestMethod.POST)
-	public Object search2(@RequestParam("shopMenu") String shopMenu) throws Exception {
+ 	public Object search2(@RequestParam("shopMenu") String shopMenu) throws Exception {
 
-		List<ShopDto> searchList = shopService.search2(shopMenu);
+		List<OrderDto> searchList = shopService.search2(shopMenu);
 
 		return searchList;
 	}
