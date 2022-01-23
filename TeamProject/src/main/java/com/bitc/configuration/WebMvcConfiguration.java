@@ -13,7 +13,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer{
 		registry.addResourceHandler("/carousel/**").addResourceLocations("file:///C:/image/carousel/");
 		registry.addResourceHandler("/kategorie/**").addResourceLocations("file:///C:/image/kategorie/");
 		registry.addResourceHandler("/shop/**").addResourceLocations("file:///C:/image/shop/");
-		registry.addResourceHandler("/menu/**").addResourceLocations("file:///C:/image/menu/");
+		registry.addResourceHandler("/images/**").addResourceLocations("file:///C:/image/");
 	}
 	
 }

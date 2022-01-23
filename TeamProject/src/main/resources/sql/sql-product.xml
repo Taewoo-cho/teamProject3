@@ -51,7 +51,7 @@
 	<select id="selectBasketPageList" resultType="com.bitc.dto.ProductDto">
 		<![CDATA[
 			SELECT
-				no, shop_name, shop_menu, shop_Mprice
+				no, shop_name, shop_menu, shop_Mprice, menu_image
 			FROM
 				t_basket
 			WHERE
@@ -65,9 +65,9 @@
 	<insert id="insertMenu" parameterType="com.bitc.dto.ProductDto" useGeneratedKeys="true" keyProperty="no">
 		<![CDATA[
 			INSERT INTO 
-				t_basket(no, shop_name, shop_menu, shop_Mprice)	
+				t_basket(no, shop_name, shop_menu, shop_Mprice, menu_image)	
 			SELECT
-				no, shop_name, shop_menu, shop_Mprice
+				no, shop_name, shop_menu, shop_Mprice, menu_image
 			FROM
 				t_order_detail
 			WHERE

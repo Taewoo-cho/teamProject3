@@ -119,9 +119,7 @@ $(document).ready(function() {
 						<div class="card" th:if="${#lists.size(basketPage.getList())} > 0" th:each="list : ${basketPage.getList()}">
 							<div class="row my-5 ms-3">
 								<div class="col-sm-4 text-center">
-									<a href="#"><img src="c:/image/kategorie/koFood.jpg"
-										th:src="@{/kategorie/koFood.jpg}" class="rounded-circle me-5"
-										style="width: 120px; height: 120px;"></a>
+									<a href="#"><img th:src="@{${list.menuImage}}" class="rounded-circle me-5"style="width: 120px; height: 120px;"></a>
 								</div>
 								<div class="col-sm-6">
 									<div>
