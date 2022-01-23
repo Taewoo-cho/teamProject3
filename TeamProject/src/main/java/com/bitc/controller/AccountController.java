@@ -103,8 +103,8 @@ public class AccountController {
 				// 5분간 세션유지
 				session.setMaxInactiveInterval(300);
 				
-				String sess = (String) session.getAttribute("userId");
-				System.out.println(sess);
+				//String sess = (String) session.getAttribute("userId");
+				//System.out.println(sess);
 				
 				return 1;
 			} else {
