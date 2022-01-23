@@ -53,14 +53,15 @@ public class ProductController {
 	}
 	
 //	메뉴 페이징
-	@RequestMapping("/menu")
-	public ModelAndView paging(@RequestParam(required = false, defaultValue="1") int pageNum) throws Exception {
+	@RequestMapping("/menu/{shopName}")
+	public ModelAndView paging(@RequestParam(required = false, defaultValue="1", value="pageNum") int pageNum, @PathVariable(value="shopName") String shopName) throws Exception {
 		ModelAndView mv = new ModelAndView("/product/Menu");
 		
-		PageInfo<ProductDto> page = new PageInfo<>(projectService.selectMenuPageList(pageNum), 3);
+		PageInfo<ProductDto> page = new PageInfo<>(projectService.selectMenuPageList(pageNum, shopName), 3);
 		
 		mv.addObject("pages", page);
-		
+		mv.addObject("shopName", shopName);
+
 		return mv;
 	}
 	

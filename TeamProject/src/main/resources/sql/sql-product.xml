@@ -32,14 +32,16 @@
 	</select>
 	
 	<!-- 메뉴 페이징 소스 -->
-	<select id="selectMenuPageList" resultType="com.bitc.dto.ProductDto">
+	<select id="selectMenuPageList" parameterType="String" resultType="com.bitc.dto.ProductDto">
 		<![CDATA[
 			SELECT
-				shop_pk, shop_menu, shop_Mprice, shop_Mdetail
+				shop_pk, shop_menu, shop_Mprice, shop_Mdetail, no, menu_image
 			FROM
-				t_shop
+				t_order_detail
 			WHERE
 				deleted_yn = 'N'
+			AND
+				shop_name = #{shopName}
 			ORDER BY
 				shop_pk DESC
 		]]>
@@ -51,7 +53,7 @@
 			SELECT
 				no, shop_name, shop_menu, shop_Mprice
 			FROM
-				t_order_detail
+				t_basket
 			WHERE
 				deleted_yn = 'N' and completed_yn = 'N'
 			ORDER BY
@@ -60,16 +62,16 @@
 	</select>
 	
 	<!-- 메뉴->장바구니 담기 -->
-	<insert id="insertMenu" parameterType="com.bitc.dto.ProductDto" useGeneratedKeys="true" keyProperty="shopPk">
+	<insert id="insertMenu" parameterType="com.bitc.dto.ProductDto" useGeneratedKeys="true" keyProperty="no">
 		<![CDATA[
 			INSERT INTO 
-				t_order_detail(shop_name, shop_menu, shop_Mprice, shop_pk)	
+				t_basket(no, shop_name, shop_menu, shop_Mprice)	
 			SELECT
-				shop_name, shop_menu, shop_Mprice, shop_pk
+				no, shop_name, shop_menu, shop_Mprice
 			FROM
-				t_shop
+				t_order_detail
 			WHERE
-				shop_pk = #{shopPk}
+				no = #{no}
 		]]>
 	</insert>
 	
@@ -77,7 +79,7 @@
 	<update id="deleteMenu" parameterType="int">
 		<![CDATA[
 			UPDATE
-				t_order_detail
+				t_basket
 			SET
 				deleted_yn = 'Y'
 			WHERE
@@ -91,7 +93,7 @@
 			SELECT
 				no, shop_menu, shop_Mprice
 			FROM
-				t_order_detail
+				t_basket
 			WHERE
 				deleted_yn = 'N' and completed_yn = 'N'
 			ORDER BY
@@ -103,9 +105,9 @@
 	<update id="clearBasket" parameterType="int">
 		<![CDATA[
 			UPDATE
-				t_order_detail
+				t_basket
 			SET
-				completed_yn = 'Y'
+				deleted_yn = 'Y', completed_yn = 'Y'
 			WHERE
 				no = #{no}
 		]]>

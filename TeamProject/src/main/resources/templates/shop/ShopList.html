@@ -12,11 +12,18 @@
 
 <script>
 $(document).ready(function() {	
+	$("#search2").keypress(function(event){
+		if(event.which == 13) {
+			$("#search1").click();
+			return false;
+		}
+	});
+	
 	$("#search1").on("click", function() {
 		var search2 = $.trim($("#search2").val());
-		
-		/* 검색창 */
-	 	$.ajax({
+	
+ 	 	/* 검색창 */
+		$.ajax({
 			url: "/ajax/search2",
 			type : "post",
 			data: {shopMenu : search2},
@@ -30,13 +37,15 @@ $(document).ready(function() {
 				var str = '<h1>Menu List</h1>';
 
 				kate.append(str);
-				
+
 				/* 검색창 */
-				/* line36,37은 shopList에서만 사용하니 사용하실 떈 지워주세요 */
 				$("#shop-list").addClass("d-none");
 				$("#menu-list").removeClass("d-none");
+				
+				$("#pageing").addClass("d-none");
 			
-				var cards = $("#items");
+var cards = $("#items");
+				
 				cards.empty();
 				
 				for (var i = 0; i < data.length; i++) {
@@ -56,6 +65,7 @@ $(document).ready(function() {
 					
 					cards.append(str);
 				}							
+	
 			}, error: function() {
 				alert("통신 실패");				
 			}
@@ -154,12 +164,12 @@ $(document).ready(function() {
 				<div id="title" class="border-top border-bottom my-3 ps-3 py-2 text-muted" style=" background:#f0f0f5;">
 					<h1>Shop List</h1>
 				</div>
-				<div class="border p-5 shadow p-3 mb-5 bg-white rounded" style="width: 1150px; height: 850px; border-radius: 40px;">
+				<div class="border p-5 shadow p-3 mb-5 bg-white rounded" style="border-radius: 40px;">
 					<form id="items">
 						<div class="card" th:if="${#lists.size(shopList.getList())} > 0" th:each="list : ${shopList.getList()}">
 							<div class="row my-5 ms-3">
 								<div class="col-sm-4 text-center">
-									<a href="#"><img th:src="@{${list.shopImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
+									<a href="/menu/" th:attrappend="href=${list.shopName}"><img th:src="@{${list.shopImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
 								</div>
 								<div class="col-sm-7">
 									<div>
@@ -171,6 +181,7 @@ $(document).ready(function() {
 											<div id="menu-list" class="d-none">
 												<h2 class="card-title" id="name" th:text="${list.shopMenu}"></h2>
 												<p class="card-text" id="detail" th:text="${list.shopMdetail}"></p>										
+												<p class="card-text" id="detail" th:text="${list.shopMprice}"></p>										
 											</div>
 										</div>
 										<div th:unless="${#lists.size(shopList)} > 0">
@@ -182,7 +193,7 @@ $(document).ready(function() {
 						</div>
 					</form>
 					<!-- 가게 목록 페이징 -->
-					<div class="my-3 clearfix">
+					<div id="pageing" class="my-3 clearfix">
 						<ul class="pagination justify-content-center">
 							<li class="page-item" th:classappend="${shopList.getPrePage() == 0} ? 'disabled'">
 								<a class="page-link" th:href="@{/shopList/{shopKate}(pageNum=${shopList.getPrePage()})}">&laquo;</a>

@@ -12,4 +12,5 @@ public class ProductDto {
 	private String shopMprice;
 	private String shopMdetail;
 	private int no;
+	private String menuImage;
 }

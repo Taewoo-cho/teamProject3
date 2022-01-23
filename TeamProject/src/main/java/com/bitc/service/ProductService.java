@@ -11,7 +11,7 @@ public interface ProductService {
 
 	List<ProductDto> selectBasketList() throws Exception;
 
-	Page<ProductDto> selectMenuPageList(int pageNum) throws Exception;
+	Page<ProductDto> selectMenuPageList(int pageNum, String shopName) throws Exception;
 
 	Page<ProductDto> selectBasketPageList(int pageNum) throws Exception;
 

@@ -27,9 +27,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Page<ProductDto> selectMenuPageList(int pageNum) throws Exception {
+	public Page<ProductDto> selectMenuPageList(int pageNum, String shopName) throws Exception {
 		PageHelper.startPage(pageNum, 3);
-		return projectMapper.selectMenuPageList();
+		return projectMapper.selectMenuPageList(shopName);
 	}
 
 	@Override

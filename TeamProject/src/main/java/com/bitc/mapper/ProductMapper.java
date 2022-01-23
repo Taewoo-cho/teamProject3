@@ -3,6 +3,7 @@ package com.bitc.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.bitc.dto.ProductDto;
 import com.github.pagehelper.Page;
@@ -14,7 +15,7 @@ public interface ProductMapper {
 
 	public List<ProductDto> selectBasketList() throws Exception;
 	
-	Page<ProductDto> selectMenuPageList() throws Exception;
+	Page<ProductDto> selectMenuPageList(@Param("shopName") String shopName) throws Exception;
 
 	Page<ProductDto> selectBasketPageList() throws Exception;
 
