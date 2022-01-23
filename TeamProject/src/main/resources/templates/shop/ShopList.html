@@ -42,7 +42,6 @@ $(document).ready(function() {
 				$("#shop-list").addClass("d-none");
 				$("#menu-list").removeClass("d-none");
 				
-				$("#pageing").addClass("d-none");
 				
 				var cards = $("#items");
 				
@@ -166,7 +165,7 @@ $(document).ready(function() {
 				</div>
 				<div class="border p-5 shadow p-3 mb-5 bg-white rounded" style="border-radius: 40px;">
 					<form id="items">
-						<div class="card" th:if="${#lists.size(shopList} > 0" th:each="list : ${shopList}">
+						<div class="card" th:if="${#lists.size(shopList)} > 0" th:each="list : ${shopList}">
 							<div class="row my-5 ms-3">
 								<div class="col-sm-4 text-center">
 									<a href="/menu/" th:attrappend="href=${list.shopName}"><img th:src="@{${list.shopImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
