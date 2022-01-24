@@ -152,13 +152,13 @@
 			    </div>
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item">
-						<a href="#" class="nav-link text-muted active ms-3"><h2>카테고리</h2></a>
+						<h2><a href="/main" class="nav-link text-muted active ms-3">TEAM3</a></h2>
 					</li>
 				</ul>
 				<!-- 검색창 -->
 				<div>
 					<form name="form-search" method="get" action="#">
-					    <div class="input-group" style="">				     
+					    <div class="input-group">				     
 					    	<input type="submit" name="search1" id="search1" class="btn btn-search text-white" value="Q" style=" background:#0099ff; border-radius: 20px 0px 0px 20px;">	     
 					    	<input size=70 type="text" name="search2" id="search2" class="form-control" placeholder="검색어를 입력하세요" aria-label="search" aria-describedby="search" style="border-radius: 0px 20px 20px 0px; border-color: #0099ff;">
 					    </div>
@@ -186,45 +186,44 @@
 		<!-- 메뉴 목록 -->
 		<div class="container p-5 ">
 			<div class="border-top border-bottom my-3 ps-3 py-2 text-muted" style=" background:#f0f0f5;">
-					<h1>Menu List</h1>
-				</div>
-				<div id="items" class="border p-5 shadow p-3 mb-5 bg-white rounded" style="border-radius: 40px;">
-					<form action="/basketPaging" method="POST">
-						<div class="card" th:if="${#lists.size(pages.getList())} > 0" th:each="list : ${pages.getList()}">
-							<div class="row my-5 ms-3">
-								<div class="col-sm-4 text-center">
-									<a href="#"><img th:src="@{${list.menuImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
-								</div>
-								<div class="col-sm-6">
-									<div class="card-body">
-										<h5 class="card-title" th:text="${list.shopName}"></h5>
-										<p class="card-text" th:text="${list.shopMenu}"></p>
-										<p class="card-text" th:text="${list.shopMprice} + ' 원'"></p>
-										<p class="card-text" th:text="${list.shopMdetail}"></p>
-									</div>
-									<!-- <div th:unless="${#lists.size(pages.getList())} > 0">
-										<p>내용이 없습니다</p>
-									</div> -->
-								</div>
-								<div class="col-sm-2 d-flex align-content-center flex-wrap">
-									<button type="button" class="btn btn-primary float-end btn-order"><span class="d-none" th:text="${list.no}"></span>담기</button>
-								</div>					
+				<h1>Menu List</h1>
+			</div>
+			<div id="items" class="border p-5 shadow p-3 mb-5 bg-white rounded" style="border-radius: 40px;">
+				<form action="/basketPaging" method="POST">
+					<div class="card" th:if="${#lists.size(pages.getList())} > 0" th:each="list : ${pages.getList()}">
+						<div class="row my-5 ms-3">
+							<div class="col-sm-4 text-center">
+								<a href="#"><img th:src="@{${list.menuImage}}" class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>
 							</div>
+							<div class="col-sm-6">
+								<div class="card-body">
+									<h5 class="card-title" th:text="${list.shopName}"></h5>
+									<p class="card-text" th:text="${list.shopMenu}"></p>
+									<p class="card-text" th:text="${list.shopMprice} + ' 원'"></p>
+									<p class="card-text" th:text="${list.shopMdetail}"></p>
+								</div>
+								<!-- <div th:unless="${#lists.size(pages.getList())} > 0">
+									<p>내용이 없습니다</p>
+								</div> -->
+							</div>
+							<div class="col-sm-2 d-flex align-content-center flex-wrap">
+								<button type="button" class="btn btn-primary float-end btn-order"><span class="d-none" th:text="${list.no}"></span>담기</button>
+							</div>					
 						</div>
-					</form>
-					<div class="my-3 clearfix">
-						<ul class="pagination justify-content-center">
-							<li class="page-item" th:classappend="${pages.getPrePage() == 0} ? 'disabled'">
-								<a class="page-link" th:href="@{|/menu/${shopName}|(pageNum=${pages.getPrePage()})}">Prev</a>
-							</li>
-							<li class="page-item" th:each="page : ${#numbers.sequence(pages.getNavigateFirstPage(), pages.getNavigateLastPage())}" th:classappend="${page == pages.getPageNum()} ? 'active'">
-								<a class="page-link" th:text="${page}" th:href="@{|/menu/${shopName}|(pageNum=${page})}"></a>
-							</li>
-							<li class="page-item" th:classappend="${pages.getNextPage() == 0} ? 'disabled'">
-								<a class="page-link" th:href="@{|/menu/${shopName}|(pageNum=${pages.getNextPage()})}">Next</a>
-							</li>
-						</ul>
 					</div>
+				</form>
+				<div class="my-3 clearfix">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" th:classappend="${pages.getPrePage() == 0} ? 'disabled'">
+							<a class="page-link" th:href="@{|/menu/${shopName}|(pageNum=${pages.getPrePage()})}">Prev</a>
+						</li>
+						<li class="page-item" th:each="page : ${#numbers.sequence(pages.getNavigateFirstPage(), pages.getNavigateLastPage())}" th:classappend="${page == pages.getPageNum()} ? 'active'">
+							<a class="page-link" th:text="${page}" th:href="@{|/menu/${shopName}|(pageNum=${page})}"></a>
+						</li>
+						<li class="page-item" th:classappend="${pages.getNextPage() == 0} ? 'disabled'">
+							<a class="page-link" th:href="@{|/menu/${shopName}|(pageNum=${pages.getNextPage()})}">Next</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
