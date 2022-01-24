@@ -160,8 +160,26 @@ $(document).ready(function() {
 		<!-- 가게 목록 -->
 		<div class="container">
 			<div class="mt-2 p-5">
-				<div id="title" class="border-top border-bottom my-3 ps-3 py-2 text-muted" style=" background:#f0f0f5;">
-					<h1>Shop List</h1>
+				<!-- 가게 이름 -->
+				<div id="title" class="border-top border-bottom my-3 ps-3 py-2 text-muted text-center" style=" background:#f0f0f5;">
+					<div th:if="${shopKate.equals('ko')}">
+						<h1>한식</h1>
+					</div>
+					<div th:if="${shopKate.equals('we')}">
+						<h1>양식</h1>
+					</div>
+					<div th:if="${shopKate.equals('jp')}">
+						<h1>일식</h1>
+					</div>
+					<div th:if="${shopKate.equals('ch')}">
+						<h1>중식</h1>
+					</div>
+					<div th:if="${shopKate.equals('snack')}">
+						<h1>야식</h1>
+					</div>
+					<div th:if="${shopKate.equals('de')}">
+						<h1>디저트</h1>
+					</div>
 				</div>
 				<div class="border p-5 shadow p-3 mb-5 bg-white rounded" style="border-radius: 40px;">
 					<form id="items">
