@@ -122,7 +122,7 @@ $(document).ready(function() {
 			    </div>
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item">
-						<h2><a href="#" class="nav-link text-muted active ms-3">카테고리</a></h2>
+						<h2><a href="/main" class="nav-link text-muted active ms-3">TEAM3</a></h2>
 					</li>
 				</ul>
 				<!-- 검색창 -->
@@ -138,7 +138,7 @@ $(document).ready(function() {
 				<!-- 마이페이지, 장바구니 -->
 				<div class="ms-auto" th:if="${session.userId} != null">
 					<div class="p-3">
-						<a href="/myPage"><img src="c:/image/main/user.png" th:src="@{/main/user.png}" style="width: 50px; height: 50px;" ></a>
+						<a href="/myPage"><img src="c:/image/main/user.png" th:src="@{/main/user.png}" style="width: 50px; height: 50px;" class="me-2" ></a>
 						<a href="/basketPaging"><img src="c:/image/main/cart.png" th:src="@{/main/cart.png}" style="width: 50px; height: 50px;" class="ms-4"></a>
 					</div>
 					<div>
