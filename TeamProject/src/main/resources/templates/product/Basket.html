@@ -23,6 +23,53 @@ $(document).ready(function() {
 		frm.action = "/delete/" + no;
 		frm.submit();
 	});
+	
+	$("#search2").keypress(function(event){
+		if(event.which == 13) {
+			$("#search1").click();
+			return false;
+		}
+	});
+	
+	$("#search1").on("click", function() {
+		var search2 = $.trim($("#search2").val());
+		
+		
+	
+ 	 	/* 검색창 */
+		$.ajax({
+			url: "/ajax/search2",
+			type : "post",
+			data: {shopMenu : search2},
+			success: function(data) {	
+				
+				var cards = $("#items");
+				
+				cards.empty();
+				
+				for (var i = 0; i < data.length; i++) {
+		               var str = '<div class="card">';
+		               str += '<div class="row my-5 ms-3">';
+		               str += '<div class="col-sm-4 text-center">';
+		               str += '<a href="/menu/'+ data[i].shopName +'"><img src=' + data[i].menuImage + ' class="rounded-circle me-5" style="width: 120px; height: 120px;"></a>';
+		               str += '</div>';
+		               str += '<div class="col-sm-7">';
+		               str += '<div>';
+		               str += '<div>';    
+		               str += '<div class="card-body">';
+		               str += '<h2 class="card-title">' + data[i].shopMenu +'</h2>';
+		               str += '<p class="card-text">' + data[i].shopMdetail +'</p>';
+		               str += '<p class="card-text">' + data[i].shopMprice +'원</p>';
+		               str += '</div></div></div></div></div></div>';
+		               
+		               cards.append(str);
+		            }		
+	
+			}, error: function() {
+				alert("통신 실패");				
+			}
+		}); 
+	});
 });
 </script>
 
@@ -110,11 +157,12 @@ $(document).ready(function() {
 	</header>
 
 	<main>
-		<div class="container">
-			<div class="mt-2 p-5">
-				<h3>카테고리</h3>
-				<div class="border p-5"
-					style="width: 1150px; height: 850px; border-radius: 40px; border-color: #0099ff;">
+		<!-- 장바구니 -->
+		<div class="container p-5 ">
+			<div class="border-top border-bottom my-3 ps-3 py-2 text-muted" style=" background:#f0f0f5;">
+					<h1>Basket</h1>
+				</div>
+				<div id="items" class="border p-5 shadow p-3 mb-5 bg-white rounded" style="border-radius: 40px;">
 					<form id="frm" method="post">
 						<div class="card" th:if="${#lists.size(basketPage.getList())} > 0" th:each="list : ${basketPage.getList()}">
 							<div class="row my-5 ms-3">
