@@ -16,6 +16,10 @@
 
 <script>
 $(document).ready(function() {
+	$("#btn-list").on("click", function() {
+		history.back();
+	});
+	
 	$(".btn-delete").on("click", function() {
 		var no = $(this).children("span").text();
 		$("#method").val("DELETE");
@@ -196,7 +200,8 @@ $(document).ready(function() {
 							<li class="page-item" th:classappend="${basketPage.getNextPage() == 0} ? 'disabled'">
 								<a class="page-link" th:href="@{/basketPaging(pageNum=${basketPage.getNextPage()})}">Next</a>
 							</li>
-						</ul>
+						</ul>						
+						<button type="button" id="btn-list" class="btn btn-secondary float-start">뒤로가기</button>
 						<a href="/price" class="btn btn-primary float-end">계산하기</a>
 					</div>
 				</div>
