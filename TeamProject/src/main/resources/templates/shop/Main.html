@@ -122,13 +122,13 @@ $(document).ready(function() {
 			    </div>
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item">
-						<a href="#" class="nav-link text-muted active ms-3"><h2>카테고리</h2></a>
+						<h2><a href="#" class="nav-link text-muted active ms-3">카테고리</a></h2>
 					</li>
 				</ul>
 				<!-- 검색창 -->
 				<div>
 					<form name="form-search" method="get" action="#">
-					    <div class="input-group" style="">
+					    <div class="input-group">
 					    	<!-- submit->button -->				     
 					    	<input type="button" name="search1" id="search1" class="btn btn-search text-white" value="Q" style=" background:#0099ff; border-radius: 20px 0px 0px 20px;">	     
 					    	<input size=70 type="text" name="search2" id="search2" class="form-control" placeholder="검색어를 입력하세요" aria-label="search" aria-describedby="search" style="border-radius: 0px 20px 20px 0px; border-color: #0099ff;">
@@ -191,42 +191,48 @@ $(document).ready(function() {
 				<div id="items" class="border mx-auto shadow p-3 mb-5 bg-white rounded" style="border-radius: 40px;">		
 					<div class="row my-5 mx-5">
 						<div class="col-sm">
-							<a href="/shopList/ko">
-								<label>한식</label>
+							<a href="/shopList/ko" class="text-decoration-none">
+								<label></label>
 								<img src="c:/image/kategorie/koFood.jpg" th:src="@{/kategorie/koFood.jpg}" class="rounded-circle me-5" style="width: 250px; height: 250px;">							
 							</a>
+							<h4 class="text-center pe-5 me-5 mt-2">한식</h4>
 						</div>
 						<div class="col-sm">
-							<a href="/shopList/we">
-								<label>양식</label>
+							<a href="/shopList/we" class="text-decoration-none">
+								<label></label>
 								<img src="c:/image/kategorie/weFood.jpg" th:src="@{/kategorie/weFood.jpg}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
 							</a>
+							<h4 class="text-center pe-5 me-5 mt-2">양식</h4>
 						</div>
 						<div class="col-sm">
-							<a href="/shopList/jp">
-								<label>일식</label>
+							<a href="/shopList/jp" class="text-decoration-none">
+								<label></label>
 								<img src="c:/image/kategorie/jpFood.jpg" th:src="@{/kategorie/jpFood.jpg}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
 							</a>
+							<h4 class="text-center pe-5 me-5 mt-2">일식</h4>
 						</div>
 					</div>				
 					<div class="row  my-5 mx-5">
 						<div class="col-sm">
-							<a href="/shopList/ch">
-								<label>중식</label>
+							<a href="/shopList/ch" class="text-decoration-none">
+								<label></label>
 								<img src="c:/image/kategorie/chFood.jpg" th:src="@{/kategorie/chFood.jpg}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
 							</a>
+							<h4 class="text-center pe-5 me-5 mt-2">중식</h4>
 						</div>
 						<div class="col-sm">
-							<a href="/shopList/snack">
-								<label>야식</label>
+							<a href="/shopList/snack" class="text-decoration-none">
+								<label></label>
 								<img src="c:/image/kategorie/snack.jfif" th:src="@{/kategorie/snack.jfif}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
 							</a>
+							<h4 class="text-center pe-5 me-5 mt-2">야식</h4>
 						</div>
 						<div class="col-sm">
-							<a href="/shopList/de">
-								<label>디저트</label>
+							<a href="/shopList/de" class="text-decoration-none">
+								<label></label>
 								<img src="c:/image/kategorie/de.jfif" th:src="@{/kategorie/de.jfif}" class="rounded-circle me-5" style="width: 250px; height: 250px;">
 							</a>
+							<h4 class="text-center pe-5 me-5 mt-2">디저트</h4>
 						</div>
 					</div>
 				</div>
